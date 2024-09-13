@@ -13,10 +13,11 @@ function App() {
   });
   const [editUsername, setEditUsername] = useState("");
   const [loading, setLoading] = useState(true);
+  const API_URL = "https://user-backend-mf7u.onrender.com";
 
   const addusers = async (user) => {
     try {
-      const response = await axios.post("http://localhost:3000/users", {
+      const response = await axios.post(`${API_URL}/users`, {
         name: user,
       });
       if (response) {
@@ -30,7 +31,7 @@ function App() {
 
   const getusers = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/users");
+      const response = await axios.get(`${API_URL}/users`);
       setUsers(response.data);
     } catch (error) {
       console.log(error);
@@ -41,7 +42,7 @@ function App() {
 
   const deleteusers = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/users/${id}`);
+      const response = await axios.delete(`${API_URL}/users/${id}`);
       if (response.data.message) {
         getusers();
       }
@@ -61,7 +62,7 @@ function App() {
 
   const saveEdit = async (id, user) => {
     try {
-      const response = await axios.put(`http://localhost:3000/users/${id}`, {
+      const response = await axios.put(`${API_URL}/users${id}`, {
         name: user,
       });
       if (response.data) {
